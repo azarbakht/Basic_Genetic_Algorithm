@@ -1,0 +1,22 @@
+function x = DecodeChromosome(chromosome, variableRange)
+
+numberOfGenes = size(chromosome,2);
+nHalf = fix(numberOfGenes/2);
+
+x(1) = 0.0;
+for j = 1:nHalf
+    x(1) = x(1) + chromosome(j)*2^(-j);
+end
+x(1) = -variableRange + 2*variableRange*x(1)/(1 - 2^(-nHalf));
+x(2) = 0.0;
+for j = 1:nHalf
+    x(2) = x(2) + chromosome(j+nHalf)*2^(-j);
+end
+x(2) = -variableRange + 2*variableRange*x(2)/(1 - 2^(-nHalf));
+
+% Note that the DecodeChromosome function is by no means general: It assumes
+% that the number of genes is even, and that only two variables are to be generated.
+% However, it is easy to modify this function, so that it can generate any number
+% of variables, de?ning each variable using a given number of genes. You will be re-
+% quired to write such code in connection with the home problems.
+
